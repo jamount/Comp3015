@@ -145,12 +145,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\..\Downloads\glad\src\glad.c" />
+    <ClCompile Include="glad.c" />
+    <ClCompile Include="helper\cube.cpp" />
     <ClCompile Include="helper\glslprogram.cpp" />
     <ClCompile Include="helper\glutils.cpp" />
     <ClCompile Include="helper\objmesh.cpp" />
     <ClCompile Include="helper\plane.cpp" />
+    <ClCompile Include="helper\stb\stb_image.cpp" />
     <ClCompile Include="helper\teapot.cpp" />
+    <ClCompile Include="helper\texture.cpp" />
     <ClCompile Include="helper\torus.cpp" />
     <ClCompile Include="helper\trianglemesh.cpp" />
     <ClCompile Include="main.cpp" />
@@ -159,11 +162,18 @@
   <ItemGroup>
     <None Include="shader\basic_uniform.frag" />
     <None Include="shader\basic_uniform.vert" />
+    <None Include="shader\blinn-phong.frag" />
+    <None Include="shader\blinn-phong.vert" />
+    <None Include="shader\fog.frag" />
     <None Include="shader\multipleLights.frag" />
     <None Include="shader\multipleLights.vert" />
+    <None Include="shader\SpotLight.frag" />
+    <None Include="shader\texture.frag" />
+    <None Include="shader\Toon.frag" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="helper\aabb.h" />
+    <ClInclude Include="helper\cube.h" />
     <ClInclude Include="helper\drawable.h" />
     <ClInclude Include="helper\glslprogram.h" />
     <ClInclude Include="helper\glutils.h" />
@@ -175,10 +185,27 @@
     <ClInclude Include="helper\stb\stb_image_write.h" />
     <ClInclude Include="helper\teapot.h" />
     <ClInclude Include="helper\teapotdata.h" />
+    <ClInclude Include="helper\texture.h" />
     <ClInclude Include="helper\torus.h" />
     <ClInclude Include="helper\trianglemesh.h" />
     <ClInclude Include="helper\utils.h" />
     <ClInclude Include="scenebasic_uniform.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="media\texture\ao_ears.png" />
+    <Image Include="media\texture\bluewater.png" />
+    <Image Include="media\texture\brick1.jpg" />
+    <Image Include="media\texture\cement.jpg" />
+    <Image Include="media\texture\fire.png" />
+    <Image Include="media\texture\flower.png" />
+    <Image Include="media\texture\hardwood2_diffuse.jpg" />
+    <Image Include="media\texture\hardwood2_roughness.jpg" />
+    <Image Include="media\texture\me_textile.png" />
+    <Image Include="media\texture\moss.png" />
+    <Image Include="media\texture\ogre_diffuse.png" />
+    <Image Include="media\texture\ogre_normalmap.png" />
+    <Image Include="media\texture\smoke.png" />
+    <Image Include="media\texture\star.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

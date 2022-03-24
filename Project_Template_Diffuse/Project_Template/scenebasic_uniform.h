@@ -7,7 +7,10 @@
 #include "helper/glslprogram.h"
 
 #include "helper/plane.h"
+#include "helper/teapot.h"
+#include "helper/torus.h"
 #include "helper/objmesh.h"
+#include "helper/cube.h"
 #include <glm/glm.hpp>
 
 class SceneBasic_Uniform : public Scene
@@ -15,9 +18,12 @@ class SceneBasic_Uniform : public Scene
 private:
     GLSLProgram prog;
     
-	Plane plane; //plane surface
-	std::unique_ptr<ObjMesh> mesh; //pig mesh
+	//Plane plane; 
+	//std::unique_ptr<ObjMesh> mesh; 
+    //Teapot teapot;
+    //Torus torus;
 
+    Cube cube;
     void setMatrices();
 
     void compile();

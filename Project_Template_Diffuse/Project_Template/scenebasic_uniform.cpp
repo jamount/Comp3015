@@ -3,55 +3,50 @@
 #include <iostream>
 using std::cerr;
 using std::endl;
-
+#include <GLFW/glfw3.h>
 #include <glm/gtc/matrix_transform.hpp>
 using glm::vec3;
 using glm::mat4;
+#include "helper/texture.h"
 
 //constructor for torus
-SceneBasic_Uniform::SceneBasic_Uniform() : plane(10.0f, 10.0f, 100, 100) {
-	mesh = ObjMesh::load("../Project_Template/media/pig_triangulated.obj",
-		true);}
+SceneBasic_Uniform::SceneBasic_Uniform() 
+{ }
 
 
-//constructor for teapot
-//SceneBasic_Uniform::SceneBasic_Uniform() : teapot(13, glm::translate(mat4(1.0f), vec3(0.0f, 1.5f, 0.25f))) {}
+
+
+
 
 void SceneBasic_Uniform::initScene()
 {
-    compile();
+	compile();
 	glEnable(GL_DEPTH_TEST);
-   
-	view = glm::lookAt(vec3(0.5f, 0.75f, 0.75f), vec3(0.0f, 0.0f, 0.0f),
+
+	view = glm::lookAt(vec3(1.0f, 1.25f, 1.25f), vec3(0.0f, 0.0f, 0.0f),
 		vec3(0.0f, 1.0f, 0.0f));
 	projection = mat4(1.0f);
-	float x, z;
-	for (int i = 0; i < 3; i++)
-	{
-		std::stringstream name;
-		name << "lights[" << i << "].Position";
-		x = 2.0f * cosf((glm::two_pi<float>() / 3) * i);
-		z = 2.0f * sinf((glm::two_pi<float>() / 3) * i);
-		prog.setUniform(name.str().c_str(), view * glm::vec4(x, 1.2f, z +
-			1.0f, 1.0f));
-	}
+	
 
-	prog.setUniform("lights[0].L", vec3(0.0f, 0.0f, 0.8f));
-	prog.setUniform("lights[1].L", vec3(0.0f, 0.8f, 0.0f));
-	prog.setUniform("lights[2].L", vec3(0.8f, 0.0f, 0.0f));
+	prog.setUniform("light.La", vec3(0.1f));
+	prog.setUniform("light.L", vec3(0.75f));
 
-	prog.setUniform("lights[0].La", vec3(0.0f, 0.0f, 0.8f));
-	prog.setUniform("lights[1].La", vec3(0.0f, 0.8f, 0.0f));
-	prog.setUniform("lights[2].La", vec3(0.8f, 0.0f, 0.0f));
+	GLuint brick =
+		Texture::loadTexture("../Project_Template/media/texture/brick1.jpg");
+	GLuint moss =
+		Texture::loadTexture("../Project_Template/media/texture/moss.png");
 
-
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, brick);
+	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_2D, moss);
 }
 
 void SceneBasic_Uniform::compile()
 {
 	try {
-		prog.compileShader("shader/multipleLights.vert");
-		prog.compileShader("shader/multipleLights.frag");
+		prog.compileShader("shader/blinn-phong.vert");
+		prog.compileShader("shader/texture.frag");
 		prog.link();
 		prog.use();
 	} catch (GLSLProgramException &e) {
@@ -68,22 +63,20 @@ void SceneBasic_Uniform::update( float t )
 void SceneBasic_Uniform::render()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	prog.setUniform("Material.Kd", 0.4f, 0.4f, 0.4f);
-	prog.setUniform("Material.Ks", 0.9f, 0.9f, 0.9f);
-	prog.setUniform("Material.Ka", 0.5f, 0.5f, 0.5f);
-	prog.setUniform("Material.Shininess", 180.0f);
+	glm::vec4 lightPos = glm::vec4(0.0f, 10.0f, 0.0f, 1.0f);
+	prog.setUniform("light.Position", vec3(view * lightPos));
+
+	//prog.setUniform("Material.Kd", vec3(0.7f, 0.7f, 0.7f));
+	//prog.setUniform("Material.Ks", vec3(0.1f, 0.1f, 0.1f));
+	//prog.setUniform("Material.Ka", vec3(0.0f, 0.0f, 0.0f));
+	prog.setUniform("Material.Shininess", 10.0f);
+
 	model = mat4(1.0f);
-	model = glm::rotate(model, glm::radians(90.0f), vec3(0.0f, 1.0f, 0.0f));
+	//model = glm::translate(model, vec3(0.0f, 0.0f, -2.0f));
+	//model = glm::rotate(model, glm::radians(45.0f), vec3(0.0f, 1.0f, 0.0f));
+	//model = glm::rotate(model, glm::radians(-90.0f), vec3(1.0f, 0.0f, 0.0f));
 	setMatrices();
-	mesh->render();
-	prog.setUniform("Material.Kd", 0.1f, 0.1f, 0.1f);
-	prog.setUniform("Material.Ks", 0.9f, 0.9f, 0.9f);
-	prog.setUniform("Material.Ka", 0.1f, 0.1f, 0.1f);
-	prog.setUniform("Material.Shininess", 180.0f);
-	model = mat4(1.0f);
-	model = glm::translate(model, vec3(0.0f, -0.45f, 0.0f));
-	setMatrices();
-	plane.render();
+	cube.render();
 }
 
 void SceneBasic_Uniform::setMatrices()

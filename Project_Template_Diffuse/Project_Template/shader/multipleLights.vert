@@ -48,5 +48,5 @@ vec3 phongModel(int light, vec3 position, vec3 n)
 }
 
 void main(){
-	vec3 n = normalize( NormalMatrix * VertexNormal);	vec4 pos = ModelViewMatrix * vec4(VertexPosition,1.0); 	Colour = vec3(0.0);	for(int i = 0; i<3;i++){		Colour += phongModel( i, camCoords, n);	}	gl_Position = MVP * vec4(VertexPosition,1.0);
+	vec3 n = normalize( NormalMatrix * VertexNormal);	vec4 pos = ModelViewMatrix * vec4(VertexPosition,1.0); 	Colour = vec3(0.0);	for(int i = 0; i<3;i++){		Colour += phongModel( i, vec3(pos), n);	}	gl_Position = MVP * vec4(VertexPosition,1.0);
 }
