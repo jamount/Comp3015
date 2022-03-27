@@ -151,6 +151,7 @@
     <ClCompile Include="helper\glutils.cpp" />
     <ClCompile Include="helper\objmesh.cpp" />
     <ClCompile Include="helper\plane.cpp" />
+    <ClCompile Include="helper\sphere.cpp" />
     <ClCompile Include="helper\stb\stb_image.cpp" />
     <ClCompile Include="helper\teapot.cpp" />
     <ClCompile Include="helper\texture.cpp" />
@@ -160,16 +161,21 @@
     <ClCompile Include="scenebasic_uniform.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="shader\basic_uniform.frag" />
-    <None Include="shader\basic_uniform.vert" />
-    <None Include="shader\blinn-phong.frag" />
-    <None Include="shader\blinn-phong.vert" />
-    <None Include="shader\fog.frag" />
-    <None Include="shader\multipleLights.frag" />
-    <None Include="shader\multipleLights.vert" />
-    <None Include="shader\SpotLight.frag" />
-    <None Include="shader\texture.frag" />
-    <None Include="shader\Toon.frag" />
+    <None Include="shader\Labs\basic_uniform.frag" />
+    <None Include="shader\Labs\basic_uniform.vert" />
+    <None Include="shader\Labs\blinn-phong.frag" />
+    <None Include="shader\Labs\blinn-phong.vert" />
+    <None Include="shader\Labs\EdgeDetect.frag" />
+    <None Include="shader\Labs\EdgeDetect.vert" />
+    <None Include="shader\Labs\fog.frag" />
+    <None Include="shader\Labs\GBlur.frag" />
+    <None Include="shader\Labs\multipleLights.frag" />
+    <None Include="shader\Labs\multipleLights.vert" />
+    <None Include="shader\Labs\SpotLight.frag" />
+    <None Include="shader\Labs\texture.frag" />
+    <None Include="shader\Labs\Toon.frag" />
+    <None Include="shader\Prototype\trees.frag" />
+    <None Include="shader\Prototype\trees.vert" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="helper\aabb.h" />
@@ -179,8 +185,10 @@
     <ClInclude Include="helper\glutils.h" />
     <ClInclude Include="helper\objmesh.h" />
     <ClInclude Include="helper\plane.h" />
+    <ClInclude Include="helper\random.h" />
     <ClInclude Include="helper\scene.h" />
     <ClInclude Include="helper\scenerunner.h" />
+    <ClInclude Include="helper\sphere.h" />
     <ClInclude Include="helper\stb\stb_image.h" />
     <ClInclude Include="helper\stb\stb_image_write.h" />
     <ClInclude Include="helper\teapot.h" />
@@ -200,12 +208,19 @@
     <Image Include="media\texture\flower.png" />
     <Image Include="media\texture\hardwood2_diffuse.jpg" />
     <Image Include="media\texture\hardwood2_roughness.jpg" />
+    <Image Include="media\texture\MeshDino_Cyan.png" />
+    <Image Include="media\texture\MeshDino_Magenta.png" />
+    <Image Include="media\texture\MeshDino_Purple.png" />
     <Image Include="media\texture\me_textile.png" />
     <Image Include="media\texture\moss.png" />
     <Image Include="media\texture\ogre_diffuse.png" />
     <Image Include="media\texture\ogre_normalmap.png" />
     <Image Include="media\texture\smoke.png" />
     <Image Include="media\texture\star.png" />
+    <Image Include="media\tree textures\Colorsheet Tree Cold.png" />
+    <Image Include="media\tree textures\Colorsheet Tree Dry.png" />
+    <Image Include="media\tree textures\Colorsheet Tree Fall.png" />
+    <Image Include="media\tree textures\Colorsheet Tree Normal.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

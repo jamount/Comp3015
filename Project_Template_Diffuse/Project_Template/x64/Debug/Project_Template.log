@@ -1,2 +1,6 @@
-﻿  scenebasic_uniform.cpp
-  Project_Template.vcxproj -> C:\Users\jmountford\Documents\GitHub\Comp3015\Project_Template_Diffuse\Project_Template\x64\Debug\Project_Template.exe
+﻿  main.cpp
+  scenebasic_uniform.cpp
+C:\Users\mount\Vitamin Z\Comp3015\Project_Template_Diffuse\Project_Template\scenebasic_uniform.cpp(47,11): warning C4101: 'z': unreferenced local variable
+C:\Users\mount\Vitamin Z\Comp3015\Project_Template_Diffuse\Project_Template\scenebasic_uniform.cpp(47,8): warning C4101: 'x': unreferenced local variable
+  Generating Code...
+  Project_Template.vcxproj -> C:\Users\mount\Vitamin Z\Comp3015\Project_Template_Diffuse\Project_Template\x64\Debug\Project_Template.exe

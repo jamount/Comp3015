@@ -17,16 +17,25 @@ class SceneBasic_Uniform : public Scene
 {
 private:
     GLSLProgram prog;
-    
-	//Plane plane; 
-	//std::unique_ptr<ObjMesh> mesh; 
-    //Teapot teapot;
+
+
+
+    //GLuint fsQuad, fboHandle, renderTex;
+    Plane plane;
+    std::unique_ptr<ObjMesh> tallTree;
+    std::unique_ptr<ObjMesh> rock;
+    std::unique_ptr<ObjMesh> sword;
+    std::unique_ptr<ObjMesh> crystal;
     //Torus torus;
-
-    Cube cube;
+    //Teapot teapot;
+    float angle;
+    float tPrev, rotSpeed;
     void setMatrices();
-
     void compile();
+    //void setupFBO();
+    //void pass1();
+    //void pass2();
+
 
 public:
     SceneBasic_Uniform();

@@ -66,26 +66,34 @@
     <ClCompile Include="helper\texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="helper\sphere.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="shader\basic_uniform.frag">
+    <None Include="shader\Labs\basic_uniform.frag">
       <Filter>shaders</Filter>
     </None>
-    <None Include="shader\basic_uniform.vert">
+    <None Include="shader\Labs\basic_uniform.vert">
       <Filter>shaders</Filter>
     </None>
-    <None Include="shader\multipleLights.vert">
+    <None Include="shader\Labs\blinn-phong.frag" />
+    <None Include="shader\Labs\blinn-phong.vert" />
+    <None Include="shader\Labs\EdgeDetect.frag" />
+    <None Include="shader\Labs\EdgeDetect.vert" />
+    <None Include="shader\Labs\fog.frag" />
+    <None Include="shader\Labs\GBlur.frag" />
+    <None Include="shader\Labs\multipleLights.frag">
       <Filter>shaders</Filter>
     </None>
-    <None Include="shader\multipleLights.frag">
+    <None Include="shader\Labs\multipleLights.vert">
       <Filter>shaders</Filter>
     </None>
-    <None Include="shader\blinn-phong.vert" />
-    <None Include="shader\blinn-phong.frag" />
-    <None Include="shader\SpotLight.frag" />
-    <None Include="shader\Toon.frag" />
-    <None Include="shader\fog.frag" />
-    <None Include="shader\texture.frag" />
+    <None Include="shader\Labs\SpotLight.frag" />
+    <None Include="shader\Labs\texture.frag" />
+    <None Include="shader\Labs\Toon.frag" />
+    <None Include="shader\Prototype\trees.frag" />
+    <None Include="shader\Prototype\trees.vert" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="helper\scene.h">
@@ -142,6 +150,12 @@
     <ClInclude Include="helper\texture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="helper\random.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="helper\sphere.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="media\texture\ao_ears.png">
@@ -184,6 +198,27 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="media\texture\star.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="media\tree textures\Colorsheet Tree Cold.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="media\tree textures\Colorsheet Tree Dry.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="media\tree textures\Colorsheet Tree Fall.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="media\tree textures\Colorsheet Tree Normal.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="media\texture\MeshDino_Cyan.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="media\texture\MeshDino_Magenta.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="media\texture\MeshDino_Purple.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
