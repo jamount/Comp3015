@@ -14,7 +14,7 @@ using glm::vec4;
 
 //constructor for torus
 SceneBasic_Uniform::SceneBasic_Uniform() : angle(0.0f), tPrev(0.0f), rotSpeed(glm::pi<float>() / 8.0f), 
-plane(10.0f, 10.0f, 100, 100)
+plane(50.0f, 50.0f, 25, 25)
 {
 	tallTree = ObjMesh::load("../Project_Template/media/tall tree.obj",
 		true);
@@ -41,12 +41,12 @@ void SceneBasic_Uniform::initScene()
 	glEnable(GL_DEPTH_TEST);
 	 	//view = glm::lookAt(vec3(0.5f, 0.75f, 0.75f), vec3(0.0f, 0.0f, 0.0f),
 		//vec3(0.0f, 1.0f, 0.0f));
-	view = mat4(1.0f);
-	view = glm::translate(view, vec3(0.0f, 0.0f, -2.0f));
-	projection = mat4(1.0f);
+	//view = mat4(1.0f);
+	//view = glm::translate(view, vec3(0.0f, 0.0f, -2.0f));
+	//projection = mat4(1.0f);
 	float x, z;
 
-	prog.setUniform("Fog.MaxDist", 15.0f);
+	prog.setUniform("Fog.MaxDist", 30.0f);
 	prog.setUniform("Fog.MinDist", 0.0f);
 	prog.setUniform("Fog.Color", vec3(0.5f, 0.35f, 0.7f));
 
@@ -78,24 +78,27 @@ void SceneBasic_Uniform::compile()
 	}
 }
 
-void SceneBasic_Uniform::update( float t )
+void SceneBasic_Uniform::update( float delta )
 {
-	prog.setUniform("light[0].L", 0.27f + vec3(cos(angle)/4));
-	prog.setUniform("Fog.MaxDist", 12.5f + cos(angle)* 2.5f);
 
 
 
-	float deltaT = t - tPrev;
-	if (tPrev == 0.0f)
-		deltaT = 0.0f;
-	tPrev = t;
-	angle += rotSpeed * deltaT;
+	angle += rotSpeed * delta;
 	if (angle > glm::two_pi<float>())
 		angle -= glm::two_pi<float>();
+
+	prog.setUniform("light[0].L", 0.27f + vec3(cos(angle) / 4));
+	//prog.setUniform("Fog.MaxDist", 12.5f + cos(angle) * 2.5f);
 }
 
-void SceneBasic_Uniform::render()
+
+
+void SceneBasic_Uniform::render( glm::mat4 projection, glm::mat4 view)
 {
+	this->projection = projection;
+	this->view = view;
+
+
 	GLuint texID =
 		Texture::loadTexture("../Project_Template/media/tree textures/Colorsheet Tree Cold.png");
 	glActiveTexture(GL_TEXTURE0);
@@ -145,7 +148,7 @@ void SceneBasic_Uniform::render()
 	model = glm::translate(model, vec3(-7.0f, 0.0f, -8.0f));
 	model = glm::scale(model, vec3(2.0f));
 	setMatrices();
-	tallTree->render();
+	tallTree->render();	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	prog.setUniform("Material.Ks", 0.5f, 0.5f, 0.5f);
 	prog.setUniform("Material.emission", 0.0f, 0.0f, 0.0f);
 	prog.setUniform("Material.Shininess", 5.0f);
@@ -153,7 +156,7 @@ void SceneBasic_Uniform::render()
 	model = glm::translate(model, vec3(0.0f, -3.0f, -4.0f));
 	model = glm::scale(model, vec3(2.0f));
 	setMatrices();
-	plane.render();	//sword in the stone	 texID =
+	plane.render();	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);	//sword in the stone	 texID =
 		Texture::loadTexture("../Project_Template/media/MeshDino_Cyan.png");
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, texID);

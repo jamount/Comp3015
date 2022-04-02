@@ -41,8 +41,8 @@ public:
     SceneBasic_Uniform();
 
     void initScene();
-    void update( float t );
-    void render();
+    void update( float delta );
+    void render( glm::mat4 projection, glm::mat4 view);
     void resize(int, int);
 };
 

@@ -2,6 +2,7 @@
 #include "scene.h"
 #include <GLFW/glfw3.h>
 #include "glutils.h"
+#include "camera.h"
 
 #define WIN_WIDTH 1000
 #define WIN_HEIGHT 750
@@ -10,6 +11,18 @@
 #include <string>
 #include <fstream>
 #include <iostream>
+
+// camera
+Camera camera(glm::vec3(0.0f, 1.4f, 0.0f));
+float lastX = WIN_WIDTH / 2.0f;
+float lastY = WIN_HEIGHT / 2.0f;
+bool firstMouse = true;
+
+// timing
+float deltaTime = 0.0f;	// time between current frame and last frame
+float lastFrame = 0.0f;
+bool firstframe = true;
+
 
 class SceneRunner {
 private:
@@ -27,7 +40,7 @@ public:
         glfwWindowHint( GLFW_CONTEXT_VERSION_MAJOR, 4 );
         glfwWindowHint( GLFW_CONTEXT_VERSION_MINOR, 1 );
 #else
-        // Select OpenGL 4.6
+        // Select OpenGL 4.5
         glfwWindowHint( GLFW_CONTEXT_VERSION_MAJOR, 4 );
         glfwWindowHint( GLFW_CONTEXT_VERSION_MINOR, 5 );
 #endif
@@ -48,7 +61,8 @@ public:
             exit( EXIT_FAILURE );
         }
         glfwMakeContextCurrent(window);
-
+        glfwSetCursorPosCallback(window, mouse_callback);
+        glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
         // Get framebuffer size
         glfwGetFramebufferSize(window, &fbw, &fbh);
 
@@ -120,15 +134,59 @@ private:
         while( ! glfwWindowShouldClose(window) && !glfwGetKey(window, GLFW_KEY_ESCAPE) ) {
             GLUtils::checkForOpenGLError(__FILE__,__LINE__);
 			
-            scene.update(float(glfwGetTime()));
-            scene.render();
+            float currentFrame = glfwGetTime();
+            deltaTime = currentFrame - lastFrame;
+            lastFrame = currentFrame;
+            if (firstframe) {
+                deltaTime = 0.0;
+                firstframe = false;
+            }
+
+            processInput(window);
+
+
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+            //setting the matrices
+            glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)WIN_WIDTH / (float)WIN_HEIGHT, 0.1f, 100.0f);
+            glm::mat4 view = camera.GetViewMatrix();
+
+            scene.update(deltaTime);
+            scene.render(projection, view);
             glfwSwapBuffers(window);
 
             glfwPollEvents();
-			int state = glfwGetKey(window, GLFW_KEY_SPACE);
-			if (state == GLFW_PRESS)
-				scene.animate(!scene.animating());
+
 
         }
+    }
+
+    void processInput(GLFWwindow* window) {
+        if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+            camera.ProcessKeyboard(FORWARD, deltaTime);
+        if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+            camera.ProcessKeyboard(BACKWARD, deltaTime);
+        if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+            camera.ProcessKeyboard(LEFT, deltaTime);
+        if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+            camera.ProcessKeyboard(RIGHT, deltaTime);
+    }
+
+    static  void mouse_callback(GLFWwindow* window, double xpos, double ypos)
+    {
+        if (firstMouse)
+        {
+            lastX = xpos;
+            lastY = ypos;
+            firstMouse = false;
+        }
+
+        float xoffset = xpos - lastX;
+        float yoffset = lastY - ypos; // reversed since y-coordinates go from bottom to top
+
+        lastX = xpos;
+        lastY = ypos;
+
+        camera.ProcessMouseMovement(xoffset, yoffset);
     }
 };

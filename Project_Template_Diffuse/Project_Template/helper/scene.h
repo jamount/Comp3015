@@ -28,12 +28,12 @@ public:
       This is called prior to every frame.  Use this
       to update your animation.
       */
-    virtual void update( float t ) = 0;
+    virtual void update( float delta ) = 0;
 
     /**
       Draw your scene.
       */
-    virtual void render() = 0;
+    virtual void render(glm::mat4 projection, glm::mat4 view) = 0;
 
     /**
       Called when screen is resized

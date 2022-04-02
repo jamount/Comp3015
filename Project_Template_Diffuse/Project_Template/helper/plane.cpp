@@ -2,12 +2,15 @@
 #include "glutils.h"
 #include <glad/glad.h>
 #include "glutils.h"
+#include "HeightGenerator.h"
 
 #include <cstdio>
 #include <cmath>
 
 Plane::Plane(float xsize, float zsize, int xdivs, int zdivs, float smax, float tmax)
 {
+    HeightGenerator generator;
+
 	int nPoints = (xdivs + 1) * (zdivs + 1);
     std::vector<GLfloat> p(3 * nPoints);
 	std::vector<GLfloat> n(3 * nPoints);
@@ -28,7 +31,7 @@ Plane::Plane(float xsize, float zsize, int xdivs, int zdivs, float smax, float t
         for( int j = 0; j <= xdivs; j++ ) {
             x = jFactor * j - x2;
             p[vidx] = x;
-            p[vidx+1] = 0.0f;
+            p[vidx + 1] = generator.generateHeight(x, z);
             p[vidx+2] = z;
 			n[vidx] = 0.0f;
 			n[vidx+1] = 1.0f;
