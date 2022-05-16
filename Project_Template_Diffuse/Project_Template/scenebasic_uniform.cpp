@@ -19,13 +19,13 @@ using glm::vec4;
 SceneBasic_Uniform::SceneBasic_Uniform() : angle(0.0f), tPrev(0.0f), rotSpeed(glm::pi<float>() / 8.0f),
 terrain(50.0f, 50.0f, 20, 20)
 {
-	tallTree = ObjMesh::loadWithAdjacency("../Project_Template/media/tall tree.obj",
+	tallTree = ObjMesh::loadWithAdjacency("media/tall tree.obj",
 		true);
-	rock = ObjMesh::loadWithAdjacency("../Project_Template/media/Rock_01.obj",
+	rock = ObjMesh::loadWithAdjacency("media/Rock_01.obj",
 		true);
-	sword = ObjMesh::loadWithAdjacency("../Project_Template/media/Sword.obj",
+	sword = ObjMesh::loadWithAdjacency("media/Sword.obj",
 		true);
-	crystal = ObjMesh::loadWithAdjacency("../Project_Template/media/Crystal_02.obj",
+	crystal = ObjMesh::loadWithAdjacency("media/Crystal_02.obj",
 		true);
 
 
@@ -65,9 +65,9 @@ void SceneBasic_Uniform::initScene()
 
 	//Load textures 
 	glActiveTexture(GL_TEXTURE2);
-	texTree = Texture::loadTexture("../Project_Template/media/tree textures/Colorsheet Tree Cold.png");
-	texRock = Texture::loadTexture("../Project_Template/media/texture/MeshDino_Cyan.png");
-	texGrass = Texture::loadTexture("../Project_Template/media/texture/grass.png");
+	texTree = Texture::loadTexture("media/tree textures/Colorsheet Tree Cold.png");
+	texRock = Texture::loadTexture("media/texture/MeshDino_Cyan.png");
+	texGrass = Texture::loadTexture("media/texture/grass.png");
 
 	updateLight();
 

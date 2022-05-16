@@ -11,8 +11,8 @@ Fire::Fire(glm::vec3 pos, float rot, float scale) : angle(0.0f), drawBuf(1), tim
 }
 
 void Fire::init() {
-	prog.compileShader("../Project_Template/shader/Particles/Fire.vert");
-	prog.compileShader("../Project_Template/shader/Particles/Fire.frag");
+	prog.compileShader("shader/Particles/Fire.vert");
+	prog.compileShader("Particles/Fire.frag");
 
 	GLuint progHandle = prog.getHandle();
 	const char* outputNames[] = { "Position", "Velocity", "Age" };
@@ -21,7 +21,7 @@ void Fire::init() {
 	prog.link();
 
 	glActiveTexture(GL_TEXTURE0);
-	Texture::loadTexture(".. / Project_Template / media / particles / fire.png");
+	Texture::loadTexture("media / particles / fire.png");
 
 	glActiveTexture(GL_TEXTURE1);
 	ParticleUtils::createRandomTex1D(nParticles * 3);
