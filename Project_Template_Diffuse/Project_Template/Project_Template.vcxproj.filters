@@ -51,9 +51,6 @@
     <ClCompile Include="helper\objmesh.cpp">
       <Filter>helper</Filter>
     </ClCompile>
-    <ClCompile Include="helper\plane.cpp">
-      <Filter>helper</Filter>
-    </ClCompile>
     <ClCompile Include="glad.c">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -67,6 +64,42 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="helper\sphere.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="helper\ParticleEmitterFountain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="helper\Fire.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="helper\frustum.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="helper\Terrain.cpp">
+      <Filter>helper</Filter>
+    </ClCompile>
+    <ClCompile Include="helper\plane.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_demo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_draw.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_impl_glfw.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_impl_opengl3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_tables.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_widgets.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -94,6 +127,22 @@
     <None Include="shader\Labs\Toon.frag" />
     <None Include="shader\Prototype\trees.frag" />
     <None Include="shader\Prototype\trees.vert" />
+    <None Include="shader\Particles\Particle.vert" />
+    <None Include="shader\Particles\Particle.frag" />
+    <None Include="shader\Particles\Fire.vert" />
+    <None Include="shader\Particles\Fire.frag" />
+    <None Include="shader\Particles\Feedback.frag" />
+    <None Include="shader\Particles\Feedback.vert" />
+    <None Include="shader\Shadows\Shadow.vert" />
+    <None Include="shader\Shadows\Shadow.frag" />
+    <None Include="shader\Shadows\SoftShadow.frag" />
+    <None Include="shader\Shadows\ShadowVolumes.vert" />
+    <None Include="shader\Shadows\ShadowVolumes.frag" />
+    <None Include="shader\Shadows\ShadowVolumes.geom" />
+    <None Include="shader\Shadows\ShadowComp.frag" />
+    <None Include="shader\Shadows\ShadowComp.vert" />
+    <None Include="shader\Shadows\ShadowRender.vert" />
+    <None Include="shader\Shadows\ShadowRender.frag" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="helper\scene.h">
@@ -138,9 +187,6 @@
     <ClInclude Include="helper\objmesh.h">
       <Filter>helper</Filter>
     </ClInclude>
-    <ClInclude Include="helper\plane.h">
-      <Filter>helper</Filter>
-    </ClInclude>
     <ClInclude Include="helper\utils.h">
       <Filter>helper</Filter>
     </ClInclude>
@@ -160,6 +206,51 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="helper\HeightGenerator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="helper\ParticleEmitterFountain.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="helper\particleutils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="helper\Fire.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="helper\frustum.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="helper\Terrain.h">
+      <Filter>helper</Filter>
+    </ClInclude>
+    <ClInclude Include="helper\plane.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imconfig.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui_impl_glfw.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui_impl_opengl3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui_internal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imstb_rectpack.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imstb_textedit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imstb_truetype.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="helper\PoissonGenerator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -225,6 +316,18 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="media\texture\MeshDino_Purple.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="media\particles\bluewater.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="media\particles\fire.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="media\particles\smoke.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="media\texture\grass.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

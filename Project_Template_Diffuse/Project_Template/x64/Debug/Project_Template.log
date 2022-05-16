@@ -1,4 +1,3 @@
 ﻿  scenebasic_uniform.cpp
-C:\Users\mount\Vitamin Z\Comp3015\Project_Template_Diffuse\Project_Template\scenebasic_uniform.cpp(47,11): warning C4101: 'z': unreferenced local variable
-C:\Users\mount\Vitamin Z\Comp3015\Project_Template_Diffuse\Project_Template\scenebasic_uniform.cpp(47,8): warning C4101: 'x': unreferenced local variable
+C:\Users\mount\Vitamin Z\Comp3015\Project_Template_Diffuse\Project_Template\helper\Terrain.h(4,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
   Project_Template.vcxproj -> C:\Users\mount\Vitamin Z\Comp3015\Project_Template_Diffuse\Project_Template\x64\Debug\Project_Template.exe

@@ -1,3 +1,7 @@
+
+#include "imgui.h"
+#include "imgui_impl_glfw.h"
+#include "imgui_impl_opengl3.h"
 #include <glad/glad.h>
 #include "scene.h"
 #include <GLFW/glfw3.h>
@@ -13,7 +17,7 @@
 #include <iostream>
 
 // camera
-Camera camera(glm::vec3(0.0f, 1.4f, 0.0f));
+Camera camera(glm::vec3(0.0f, 20.0f, 0.0f));
 float lastX = WIN_WIDTH / 2.0f;
 float lastY = WIN_HEIGHT / 2.0f;
 bool firstMouse = true;
@@ -23,12 +27,15 @@ float deltaTime = 0.0f;	// time between current frame and last frame
 float lastFrame = 0.0f;
 bool firstframe = true;
 
+bool spacePressed = false;
 
 class SceneRunner {
 private:
     GLFWwindow * window;
     int fbw, fbh;
 	bool debug;           // Set true to enable debug messages
+
+
 
 public:
     SceneRunner(const std::string & windowTitle, int width = WIN_WIDTH, int height = WIN_HEIGHT, int samples = 0) : debug(true) {
@@ -131,6 +138,16 @@ private:
     }
 
     void mainLoop(GLFWwindow * window, Scene & scene) {
+
+        IMGUI_CHECKVERSION();
+        ImGui::CreateContext();
+        ImGuiIO& io = ImGui::GetIO(); (void)io;
+        ImGui::StyleColorsDark();
+        ImGui_ImplGlfw_InitForOpenGL(window, true);
+        ImGui_ImplOpenGL3_Init("#version 450");
+
+        bool drawTree = true;
+
         while( ! glfwWindowShouldClose(window) && !glfwGetKey(window, GLFW_KEY_ESCAPE) ) {
             GLUtils::checkForOpenGLError(__FILE__,__LINE__);
 			
@@ -147,33 +164,60 @@ private:
 
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+            ImGui_ImplOpenGL3_NewFrame();
+            ImGui_ImplGlfw_NewFrame();
+            ImGui::NewFrame();
+
+
+
             //setting the matrices
             glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)WIN_WIDTH / (float)WIN_HEIGHT, 0.1f, 100.0f);
             glm::mat4 view = camera.GetViewMatrix();
 
             scene.update(deltaTime);
             scene.render(projection, view);
+
+
+
+            ImGui::Render();
+            ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
             glfwSwapBuffers(window);
 
             glfwPollEvents();
 
 
         }
+        ImGui_ImplOpenGL3_Shutdown();
+        ImGui_ImplGlfw_Shutdown();
+        ImGui::DestroyContext();
+
     }
 
     void processInput(GLFWwindow* window) {
-        if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-            camera.ProcessKeyboard(FORWARD, deltaTime);
+        if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)            camera.ProcessKeyboard(FORWARD, deltaTime);
         if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
             camera.ProcessKeyboard(BACKWARD, deltaTime);
         if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
             camera.ProcessKeyboard(LEFT, deltaTime);
         if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
             camera.ProcessKeyboard(RIGHT, deltaTime);
+
+        if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
+            if (!spacePressed) {
+                spacePressed = true;
+                glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+            }
+            else {
+                spacePressed = false;
+                glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+            }
+
     }
 
     static  void mouse_callback(GLFWwindow* window, double xpos, double ypos)
     {
+
         if (firstMouse)
         {
             lastX = xpos;
@@ -187,6 +231,9 @@ private:
         lastX = xpos;
         lastY = ypos;
 
-        camera.ProcessMouseMovement(xoffset, yoffset);
+        if (!spacePressed) {
+            camera.ProcessMouseMovement(xoffset, yoffset);
+        }
+
     }
 };

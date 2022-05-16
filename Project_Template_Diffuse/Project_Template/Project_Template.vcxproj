@@ -92,6 +92,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -106,6 +107,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -120,6 +122,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -135,6 +138,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -147,16 +151,27 @@
   <ItemGroup>
     <ClCompile Include="glad.c" />
     <ClCompile Include="helper\cube.cpp" />
+    <ClCompile Include="helper\Fire.cpp" />
+    <ClCompile Include="helper\frustum.cpp" />
     <ClCompile Include="helper\glslprogram.cpp" />
     <ClCompile Include="helper\glutils.cpp" />
     <ClCompile Include="helper\objmesh.cpp" />
+    <ClCompile Include="helper\ParticleEmitterFountain.cpp" />
     <ClCompile Include="helper\plane.cpp" />
+    <ClCompile Include="helper\Terrain.cpp" />
     <ClCompile Include="helper\sphere.cpp" />
     <ClCompile Include="helper\stb\stb_image.cpp" />
     <ClCompile Include="helper\teapot.cpp" />
     <ClCompile Include="helper\texture.cpp" />
     <ClCompile Include="helper\torus.cpp" />
     <ClCompile Include="helper\trianglemesh.cpp" />
+    <ClCompile Include="imgui\imgui.cpp" />
+    <ClCompile Include="imgui\imgui_demo.cpp" />
+    <ClCompile Include="imgui\imgui_draw.cpp" />
+    <ClCompile Include="imgui\imgui_impl_glfw.cpp" />
+    <ClCompile Include="imgui\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="imgui\imgui_tables.cpp" />
+    <ClCompile Include="imgui\imgui_widgets.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="scenebasic_uniform.cpp" />
   </ItemGroup>
@@ -174,19 +189,41 @@
     <None Include="shader\Labs\SpotLight.frag" />
     <None Include="shader\Labs\texture.frag" />
     <None Include="shader\Labs\Toon.frag" />
+    <None Include="shader\Particles\Feedback.frag" />
+    <None Include="shader\Particles\Feedback.vert" />
+    <None Include="shader\Particles\Fire.frag" />
+    <None Include="shader\Particles\Fire.vert" />
+    <None Include="shader\Particles\Particle.vert" />
+    <None Include="shader\Particles\Particle.frag" />
     <None Include="shader\Prototype\trees.frag" />
     <None Include="shader\Prototype\trees.vert" />
+    <None Include="shader\Shadows\Shadow.frag" />
+    <None Include="shader\Shadows\Shadow.vert" />
+    <None Include="shader\Shadows\ShadowComp.frag" />
+    <None Include="shader\Shadows\ShadowComp.vert" />
+    <None Include="shader\Shadows\ShadowRender.frag" />
+    <None Include="shader\Shadows\ShadowRender.vert" />
+    <None Include="shader\Shadows\ShadowVolumes.frag" />
+    <None Include="shader\Shadows\ShadowVolumes.geom" />
+    <None Include="shader\Shadows\ShadowVolumes.vert" />
+    <None Include="shader\Shadows\SoftShadow.frag" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="helper\aabb.h" />
     <ClInclude Include="helper\camera.h" />
     <ClInclude Include="helper\cube.h" />
     <ClInclude Include="helper\drawable.h" />
+    <ClInclude Include="helper\Fire.h" />
+    <ClInclude Include="helper\frustum.h" />
     <ClInclude Include="helper\glslprogram.h" />
     <ClInclude Include="helper\glutils.h" />
     <ClInclude Include="helper\HeightGenerator.h" />
     <ClInclude Include="helper\objmesh.h" />
+    <ClInclude Include="helper\ParticleEmitterFountain.h" />
+    <ClInclude Include="helper\particleutils.h" />
     <ClInclude Include="helper\plane.h" />
+    <ClInclude Include="helper\PoissonGenerator.h" />
+    <ClInclude Include="helper\Terrain.h" />
     <ClInclude Include="helper\random.h" />
     <ClInclude Include="helper\scene.h" />
     <ClInclude Include="helper\scenerunner.h" />
@@ -199,15 +236,27 @@
     <ClInclude Include="helper\torus.h" />
     <ClInclude Include="helper\trianglemesh.h" />
     <ClInclude Include="helper\utils.h" />
+    <ClInclude Include="imgui\imconfig.h" />
+    <ClInclude Include="imgui\imgui.h" />
+    <ClInclude Include="imgui\imgui_impl_glfw.h" />
+    <ClInclude Include="imgui\imgui_impl_opengl3.h" />
+    <ClInclude Include="imgui\imgui_internal.h" />
+    <ClInclude Include="imgui\imstb_rectpack.h" />
+    <ClInclude Include="imgui\imstb_textedit.h" />
+    <ClInclude Include="imgui\imstb_truetype.h" />
     <ClInclude Include="scenebasic_uniform.h" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="media\particles\bluewater.png" />
+    <Image Include="media\particles\fire.png" />
+    <Image Include="media\particles\smoke.png" />
     <Image Include="media\texture\ao_ears.png" />
     <Image Include="media\texture\bluewater.png" />
     <Image Include="media\texture\brick1.jpg" />
     <Image Include="media\texture\cement.jpg" />
     <Image Include="media\texture\fire.png" />
     <Image Include="media\texture\flower.png" />
+    <Image Include="media\texture\grass.png" />
     <Image Include="media\texture\hardwood2_diffuse.jpg" />
     <Image Include="media\texture\hardwood2_roughness.jpg" />
     <Image Include="media\texture\MeshDino_Cyan.png" />
